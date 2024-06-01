@@ -1,10 +1,8 @@
+<script setup lang="ts">
+
+import BaseButton from '@/components/form/BaseButton.vue';
+
+</script>
 <template>
-  <button type="submit">
-    <slot></slot>
-  </button>
-
+  <BaseButton type="submit"><slot/></BaseButton>
 </template>
-
-<style scoped>
-
-</style>

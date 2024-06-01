@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import api from '@/api';
 
 export const useUsuariostore = defineStore('usuario', () => {
-  const usuario = ref({});
+  const usuario = ref({} as any);
 
   async function login(email: string, senha: string) {
     const retorno: any = await api.post('usuarios/login', { email, senha });

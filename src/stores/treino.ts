@@ -8,7 +8,7 @@ export const useTreinoStore = defineStore('treino', () => {
   const treinos = ref([]);
 
   async function buscar() {
-    const userId = useUsuariostore().usuario.user?.uid ?? undefined;
+    const userId = useUsuariostore().usuario.user.uid ?? undefined;
 
     if (!userId) {
       return useRouter().push({name: 'login'});

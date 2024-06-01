@@ -4,8 +4,9 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUsuariostore } from '@/stores/usuario';
 import router from '@/router';
-import BaseInput from '@/components/form/TextInput.vue';
-import SubmitButton from '@/components/form/SubmitButton.vue';
+import TextInput from '@/components/form/TextInput.vue';
+import BaseForm from '@/components/form/FloatingForm.vue';
+import ButtonAnchor from '@/components/form/ButtonAchor.vue';
 
 const email = ref('');
 const senha = ref('');
@@ -26,21 +27,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h1>Login</h1>
-    <form action="#" @submit.prevent="login">
-      <BaseInput titulo="E-mail" name="email" v-model="email"/>
-      <BaseInput titulo="Senha" name="senha" v-model="senha" secreto/>
-      <SubmitButton>Login</SubmitButton>
-    </form>
-
-    <router-link to="/cadastrar">Cadastre-se</router-link>
-  </div>
+    <BaseForm botao="Login" titulo="Member Login" @submit="login" style="margin-top: 300px">
+      <template #default>
+        <TextInput titulo="E-mail" name="email" v-model="email"/>
+        <TextInput titulo="Senha" name="senha" v-model="senha" secreto/>
+      </template>
+      <template #form-footer>
+        <ButtonAnchor :to="{name: 'cadastrar'}">REGISTER</ButtonAnchor>
+      </template>
+    </BaseForm>
 </template>
 
 <style scoped lang="scss">
-form {
-  display: flex;
-  flex-direction: column;
+.cadastre-se {
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  margin: auto;
 }
 </style>
