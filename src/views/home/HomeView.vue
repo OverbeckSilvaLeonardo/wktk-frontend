@@ -1,16 +1,20 @@
-<script setup lang="ts">
-import { onMounted } from 'vue';
-import { useTreinoStore } from '@/stores/treino';
-
-onMounted(() => {
-  useTreinoStore().buscar();
-});
-</script>
-
 <template>
-  <h1>Home</h1>
+  <div class="container">
+    <router-view/>
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.container {
+  padding: 10px;
+  margin: 20px auto;
+}
 
+@media (min-width: 1024px) {
+  .container {
+    width: 80%;
+  }
+}
 </style>
+<script setup lang="ts">
+</script>

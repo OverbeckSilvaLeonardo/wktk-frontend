@@ -14,7 +14,7 @@ const emit = defineEmits(["clicado"])
 
 <template>
   <button :type="props.type" @click="emit('clicado')" :style="{backgroundColor: props.backgroundColor}">
-    <slot></slot>
+    <slot />
   </button>
 </template>
 
@@ -26,6 +26,7 @@ button {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 12px;
+  cursor: pointer;
 }
 
 </style>

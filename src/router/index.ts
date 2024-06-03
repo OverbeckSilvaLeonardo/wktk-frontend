@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import UsuarioView from '@/views/usuario/UsuarioView.vue';
+import BaseView from '@/views/BaseView.vue';
 import LoginPage from '@/views/usuario/LoginView.vue';
 
 const router = createRouter({
@@ -7,8 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'usuario',
-      component: UsuarioView,
+      name: 'base',
+      component: BaseView,
       children: [
         {
           path: '/login',
@@ -18,16 +18,36 @@ const router = createRouter({
         {
           path: '/cadastrar',
           name: 'cadastrar',
-          component: () => import('@/views/usuario/CadastrarView.vue')
+          component: () => import('@/views/usuario/CadastrarView.vue'),
         },
+        {
+          path: '/',
+          name: 'home',
+          component: () => import('@/views/home/HomeView.vue'),
+          children: [
+            {
+              path: '/treinos',
+              name: 'treinos',
+              component: () => import('@/views/home/ListaTreinosView.vue'),
+            },
+            {
+              path: 'treinos/:id',
+              name: 'treino',
+              props: true,
+              component: () => import('@/views/home/VisualizarTreinoView.vue'),
+            },
+            {
+              path: 'treinos/novo-treino',
+              name: 'novo-treino',
+              props: true,
+              component: () => import('@/views/home/CriarTreinoView.vue'),
+            }
+          ]
+        }
       ]
     },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('@/views/home/HomeView.vue'),
-    }
-  ]
-})
 
-export default router
+  ]
+});
+
+export default router;

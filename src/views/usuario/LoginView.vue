@@ -2,18 +2,18 @@
 
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUsuariostore } from '@/stores/usuario';
+import { useUsuariosStore } from '@/stores/usuario';
 import router from '@/router';
 import TextInput from '@/components/form/TextInput.vue';
-import BaseForm from '@/components/form/FloatingForm.vue';
+import FloatingForm from '@/components/form/FloatingForm.vue';
 import ButtonAnchor from '@/components/form/ButtonAchor.vue';
 
 const email = ref('');
 const senha = ref('');
 
 function login() {
-  useUsuariostore().login(email.value, senha.value).then(() => {
-    router.push({ name: 'home' });
+  useUsuariosStore().login(email.value, senha.value).then(() => {
+    router.push({ name: 'treinos' });
   }).catch((error: Error) => {
     console.error(error);
   });
@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <BaseForm botao="Login" titulo="Member Login" @submit="login" style="margin-top: 300px">
+    <FloatingForm botao="Login" titulo="Member Login" @submit="login" style="margin-top: 200px">
       <template #default>
         <TextInput titulo="E-mail" name="email" v-model="email"/>
         <TextInput titulo="Senha" name="senha" v-model="senha" secreto/>
@@ -35,7 +35,7 @@ onMounted(() => {
       <template #form-footer>
         <ButtonAnchor :to="{name: 'cadastrar'}">REGISTER</ButtonAnchor>
       </template>
-    </BaseForm>
+    </FloatingForm>
 </template>
 
 <style scoped lang="scss">

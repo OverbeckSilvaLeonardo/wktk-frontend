@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import api from '@/api';
 
-export const useUsuariostore = defineStore('usuario', () => {
+export const useUsuariosStore = defineStore('usuario', () => {
   const usuario = ref({} as any);
 
   async function login(email: string, senha: string) {

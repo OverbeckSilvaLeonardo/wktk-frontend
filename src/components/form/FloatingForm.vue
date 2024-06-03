@@ -33,7 +33,7 @@ const temSlot = (nome: string) => !!useSlots()[nome]
 
 <style scoped lang="scss">
 .container {
-  top: 300px;
+  //top: 200px;
   width: 300px;
   margin: auto;
   background: rgb(32,39,48);
