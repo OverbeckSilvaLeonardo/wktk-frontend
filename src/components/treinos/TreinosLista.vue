@@ -3,12 +3,16 @@ import { onMounted, ref } from 'vue';
 import { useTreinoStore } from '@/stores/treino';
 import type { ITreino } from '@/interfaces/treino.interface';
 import TreinosItem from '@/components/treinos/TreinosItem.vue';
+import type { AxiosError } from 'axios';
+import { useAlertaStore } from '@/stores/alerta';
 
 const treinos = ref<ITreino[]>([]);
 
 async function atualizar() {
   const store = useTreinoStore();
-  await store.buscar();
+  await store.buscar().catch((error: AxiosError) => {
+    useAlertaStore().alertar(error.response?.data?.message ?? ('Ocorreu um erro ao tentar acessar.'));
+  });
   treinos.value = store.treinos;
 }
 

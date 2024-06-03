@@ -7,6 +7,8 @@ import BaseButton from '@/components/BaseButton.vue';
 import ButtonAchor from '@/components/form/ButtonAchor.vue';
 import { useTreinoStore } from '@/stores/treino';
 import router from '@/router';
+import type { AxiosError } from 'axios';
+import { useAlertaStore } from '@/stores/alerta';
 
 const treino = ref<ITreino>({
   id: undefined,
@@ -15,7 +17,9 @@ const treino = ref<ITreino>({
 });
 
 async function criarTreino() {
-  await useTreinoStore().gravar(treino.value);
+  await useTreinoStore().gravar(treino.value).catch((error: AxiosError) => {
+    useAlertaStore().alertar(error.response?.data?.message ?? ('Ocorreu um erro ao tentar acessar.'));
+  });
 
   return router.push({ name: 'treinos' });
 }

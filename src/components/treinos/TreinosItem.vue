@@ -3,7 +3,8 @@
 import TreinoAnchor from '@/components/treinos/TreinoAnchor.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import { useTreinoStore } from '@/stores/treino';
-import router from '@/router';
+import type { AxiosError } from 'axios';
+import { useAlertaStore } from '@/stores/alerta';
 
 const props = defineProps({
   treino: {
@@ -15,7 +16,9 @@ const props = defineProps({
 const emit = defineEmits(['removido']);
 
 async function remover() {
-  await useTreinoStore().remover(props.treino.id);
+  await useTreinoStore().remover(props.treino.id).catch((error: AxiosError) => {
+    useAlertaStore().alertar(error.response?.data?.message ?? ('Ocorreu um erro ao tentar acessar.'));
+  });;
 
   emit('removido');
 }

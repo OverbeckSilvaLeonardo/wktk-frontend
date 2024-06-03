@@ -20,7 +20,7 @@ export const useTreinoStore = defineStore('treino', () => {
     treinos.value = retorno.data.treinos;
   }
 
-  async function find(id: string = ''): ITreino {
+  async function find(id: string = '') {
     if (treinos.value.length === 0) {
       await buscar();
     }

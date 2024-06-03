@@ -7,6 +7,8 @@ import router from '@/router';
 import TextInput from '@/components/form/TextInput.vue';
 import FloatingForm from '@/components/form/FloatingForm.vue';
 import ButtonAnchor from '@/components/form/ButtonAchor.vue';
+import { useAlertaStore } from '@/stores/alerta';
+import type { AxiosError } from 'axios';
 
 const email = ref('');
 const senha = ref('');
@@ -14,8 +16,8 @@ const senha = ref('');
 function login() {
   useUsuariosStore().login(email.value, senha.value).then(() => {
     router.push({ name: 'treinos' });
-  }).catch((error: Error) => {
-    console.error(error);
+  }).catch((error: AxiosError) => {
+    useAlertaStore().alertar(error.response?.data?.message ?? ('Ocorreu um erro ao tentar acessar.'));
   });
 }
 

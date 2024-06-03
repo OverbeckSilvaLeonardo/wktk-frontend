@@ -5,6 +5,8 @@ import { useUsuariosStore } from '@/stores/usuario';
 import router from '@/router';
 import TextInput from '@/components/form/TextInput.vue';
 import BaseForm from '@/components/form/FloatingForm.vue';
+import type { AxiosError } from 'axios';
+import { useAlertaStore } from '@/stores/alerta';
 
 const email = ref('');
 const senha = ref('');
@@ -12,8 +14,8 @@ const senha = ref('');
 function cadastrar() {
   useUsuariosStore().cadastrar(email.value, senha.value).then(() => {
     router.push({ name: 'login', query: { email: email.value } });
-  }).catch((error: Error) => {
-    console.error(error);
+  }).catch((error: AxiosError) => {
+    useAlertaStore().alertar(error.response?.data?.message ?? ('Ocorreu um erro ao tentar acessar.'));
   });
 }
 
