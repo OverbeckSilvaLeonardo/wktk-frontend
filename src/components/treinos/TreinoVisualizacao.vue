@@ -47,9 +47,9 @@ function updateExercicio(index: number, campo: string, valor: string | number): 
       <h3 class="exercicios-item-title" v-if="!edit">{{ exercicio.descricao }}</h3>
       <input v-else type="text" @input="(e) => updateExercicio(index, 'descricao', e.target.value)" :value="exercicio.descricao" placeholder="Descrição">
       <h3 class="exercicios-item-title" v-if="!edit">{{ exercicio.volume }}</h3>
-      <input v-else type="number" @input="(e) => updateExercicio(index, 'volume', e.target.value)" :value="exercicio.volume" placeholder="Volume">
+      <input v-else type="text" @input="(e) => updateExercicio(index, 'volume', e.target.value)" :value="exercicio.volume" placeholder="Séries e Repetições">
       <h3 class="exercicios-item-title" v-if="!edit">{{ exercicio.intensidade }}</h3>
-      <input v-else type="number" @input="(e) => updateExercicio(index, 'intensidade', e.target.value)" :value="exercicio.intensidade" placeholder="Intensidade">
+      <input v-else type="number" @input="(e) => updateExercicio(index, 'intensidade', e.target.value)" :value="exercicio.intensidade" placeholder="Peso (KG)">
     </div>
   </div>
 </template>
